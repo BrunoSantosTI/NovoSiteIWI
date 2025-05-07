@@ -23,6 +23,10 @@ body{
 background-color:#e2e2e1;
 }
 
+section{
+    scroll-margin-top: 90px;
+}
+
 html{
     scroll-behavior: smooth;
 }
@@ -193,6 +197,11 @@ header .container{
     .banner{
         margin-top: 200px;
     }
+
+    section{
+        scroll-margin-top: 90px;
+    }
+    
 
 }
 
