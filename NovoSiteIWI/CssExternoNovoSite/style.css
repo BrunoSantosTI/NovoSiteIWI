@@ -183,6 +183,39 @@ header .container{
 
 }
 
+#caracteristicas .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: justify;
+    padding: 50px 0; 
+    flex-wrap: wrap;
+}
+
+#caracteristicas .item {
+    background-color: #f2f6f0;
+    border: 1px solid #afafaf;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+
+}
+
+#caracteristicas .item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px #09092d75; 
+}
+
+.imgcard_title, .imgcard_text{
+    padding-top: 10px;
+}
+
+.imgcard{
+    max-width: 100%;
+}
+
 @media(max-width:920px){
     header .container, .historia-container{
         flex-direction: column;
@@ -204,6 +237,8 @@ header .container{
     
 
 }
+
+
 
 main h1{
     background-color: #26077a;
