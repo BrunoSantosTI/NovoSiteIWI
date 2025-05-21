@@ -187,9 +187,12 @@ header .container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    text-align: justify;
     padding: 50px 0; 
     flex-wrap: wrap;
+}
+
+.imgcard_text{
+    text-align: justify;
 }
 
 #caracteristicas .item {
@@ -215,6 +218,66 @@ header .container{
 .imgcard{
     max-width: 100%;
 }
+
+.card-modal{
+    max-width: 500px;
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.245) ;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    background:#f2f6f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    margin: auto;
+    text-align: center;    
+}
+
+.modal:target{
+    display: flex;
+}
+
+.modal-content{
+    background:#f2f6f0 ;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: ;
+}
+
+.card-modal h3{
+    margin-top: 5px;
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #09092d;
+    color: #f2f6f0;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn a{
+    align-items: center;
+}
+
 
 @media(max-width:920px){
     header .container, .historia-container{
