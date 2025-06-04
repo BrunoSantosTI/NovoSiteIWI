@@ -236,13 +236,17 @@ header .container{
 }
 
 .modal{
-    background:#f2f6f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    margin: auto;
-    text-align: center;    
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center; 
 }
 
 .modal:target{
@@ -255,7 +259,11 @@ header .container{
     border-radius: 10px;
     max-width: 400px;
     text-align: center;
-    box-shadow: ;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3{
+    font-size: 2px;
 }
 
 .card-modal h3{
