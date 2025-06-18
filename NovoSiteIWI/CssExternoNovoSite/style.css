@@ -69,7 +69,9 @@ nav ul li a{
 
 nav ul li a:hover{
     background-color: #2838a3;
-    height: 20px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5;
+    color: #09092d;
 }
 
 header .container{
@@ -246,7 +248,20 @@ header .container{
     background: rgba(0, 0, 0, 0.6);
     display: none;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+}
+
+.modal a{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #09092d;
+    color: #f2f6f0;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+
 }
 
 .modal:target{
@@ -257,13 +272,19 @@ header .container{
     background:#f2f6f0 ;
     padding: 30px;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 40%;
+    max-height: 75%;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;     
 }
 
 .modal-content h3{
     font-size: 2px;
+}
+
+.modal-content a{
+    align-items:last baseline;
 }
 
 .card-modal h3{
