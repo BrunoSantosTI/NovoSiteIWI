@@ -326,7 +326,12 @@ header .container{
     section{
         scroll-margin-top: 90px;
     }
-    
+
+    .modal-content{
+        max-height: 300px;
+        max-width: 200px;
+    }
+
 
 }
 
