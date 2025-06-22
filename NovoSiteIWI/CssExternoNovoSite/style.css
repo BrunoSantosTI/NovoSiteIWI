@@ -147,12 +147,12 @@ header .container{
     margin-top: 10px;
 }
 
-.historia-texto a{
+.fonte a{
     color: #2838a3;
     text-decoration: none;
 }
     
-.historia-texto a:hover{
+.fonte a:hover{
     background-color: #2a60c9;
     height: 20px;
 }
@@ -248,7 +248,7 @@ header .container{
     align-items: center;
 }
 
-.modal a{
+.close-btn{
     display: inline-block;
     margin-top: 15px;
     padding: 10px 15px;
