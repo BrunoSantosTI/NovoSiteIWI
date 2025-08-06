@@ -39,96 +39,70 @@
         
         <section id="contato">
             <div class="container">
-                <h1>Contato</h1>
-                <h4>E-Mail:</h4>
-                <p>bruno.santos1454@etec.sp.gov.br</p>
-                <h4>Telefone</h4>
-                <p>+55 11 95186-4677</p>
+                <h1 class="title_ctt">Contato</h1>
+                <form class="formulario-contato" action="https://formsubmit.co/bruno.santos1454@etec.sp.gov.br" method="post">
+                    <div class="dados-form">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="dados-form">
+                        <label for="email">Endereço de E-mail</label>
+                        <input type="email" id="email" name="email" required>
+
+                    </div>
+
+                    <div class="dados-form">
+                        <label for="idade">Idade</label>
+                        <input type="number" id="idade" name="idade" min="7" max="130" required>
+                    </div>
+
+                    <div class="dados-form">
+                        <label for="interesse">Quando começou o seu interesse pelo ENIAC(aproximadamente)</label>
+                        <input type="month" id="interesse" name="interesse">
+                        <input type="submit" value="Submit">
+                    </div>
+
+                    <div class="dados-form">
+                        <label for="era">Para qual geração da evolução dos computadores</label>
+                        
+                        
+                    </div>
+                    
+                    <div class="dados-form">
+                        
+                    </div>
+                    
+                    <div class="dados-form">
+
+                    </div>
+                    
+                    <div class="dados-form">
+                        
+                    </div>
+                    
+                    <div class="dados-form">
+                        <label for="grau-interresse">Qual o seu grau de interesse de 0 a 10 pela área de tecnologia?</label>
+                        <input type="range" id="grau-interresse" name="grau-interresse" min="0" max="10">
+                    
+                    </div>
+                    
+                    <div class="dados-form">
+                        <label for="historia-form">Conte-nos um pouco de uma história com a tecnologia</label>
+                        <textarea name="historia-form" id="historia-form" rows="10"></textarea>
+                        
+                    </div>
+                    
+                    <div class="dados-form-centro">
+                        
+                    </div>
+                    
+                </form>
             </div>
 
         </section>
     </main>
     <footer>2025 - Site desenvolvido por Bruno F. Santos - ETEC MCM - Todos os Direitos Reservados ©</footer>
     
-    <div class="card-modal">
-
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h3>Tamanho e Peso do ENIAC: A Escala Física do Primeiro Computador Eletrônico</h3>
-                <p>O ENIAC (Electronic Numerical Integrator and Computer), finalizado em 1946, foi um dos mais ambiciosos projetos tecnológicos do século XX. Muito além de seu valor computacional, ele impressionava — e ainda impressiona — pelo seu porte físico gigantesco. Seu tamanho e peso são evidências do estado incipiente da tecnologia eletrônica da época e da ausência de miniaturização que hoje é tida como padrão.</p>
-                <h5>Dimensões Físicas</h5>
-                <p>O ENIAC ocupava uma área de aproximadamente 167 m², o equivalente ao espaço de uma residência de médio porte. Ele estava distribuído ao longo de um salão retangular, com seus componentes montados em 42 painéis metálicos de aproximadamente 2,75 metros de altura e cerca de 60 centímetros de largura cada.</p>
-                <p>Esses painéis eram organizados em formato de U, alinhados ao longo das paredes e corredores. Havia pouco espaço para circulação entre eles, e técnicos e operadores frequentemente trabalhavam em pé ou sentados em pequenas estações ao lado dos módulos.</p>
-                <p>Resumo das dimensões estimadas:</p>
-                <ul class="list_card">
-                    <li>Comprimento total dos painéis enfileirados: cerca de 26 metros lineares</li>
-                    <li>Altura dos painéis: ~2,75 metros</li>
-                </ul>
-                <p class="fonte"> Fonte : <a href="https://www.seas.upenn.edu/about/history-heritage/eniac/">PENN </a></p>
-                <a href="#" onclick="history.back()" class="close-btn">Fechar</a>
-            </div>
-
-        </div>
-
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <h3>Consumo de Energia e Aquecimento do ENIAC: O Gigante Energético da Computação</h3>
-                <p>O ENIAC (Electronic Numerical Integrator and Computer), construído entre 1943 e 1946, é amplamente reconhecido como o primeiro computador eletrônico de uso geral. Desenvolvido por John Presper Eckert e John William Mauchly, na Universidade da Pensilvânia, ele representou uma revolução tecnológica. No entanto, seu impacto não foi apenas funcional: o ENIAC também se destacou pelo enorme consumo de energia e pelos desafios térmicos associados ao seu funcionamento.</p>
-                <h5>Estrutura e Componentes de Alta Demanda Energética</h5>
-                <p>O ENIAC utilizava cerca de 17.468 válvulas termiônicas (tubos a vácuo), além de milhares de resistores, capacitores e relés eletromecânicos. Essas válvulas eram os principais elementos ativos do sistema, funcionando como os "transistores" da época, amplificando sinais e controlando o fluxo de corrente elétrica.</p>
-                <p>Cada válvula operava a altas temperaturas e exigia um fornecimento constante de energia elétrica para manter sua condução. Isso gerava uma demanda energética colossal para os padrões da época (e ainda significativa para os padrões atuais). O ENIAC consumia, em média, cerca de 150 kW (quilowatts) de potência elétrica contínua — equivalente ao consumo de cerca de 50 a 100 residências médias modernas.</p>
-                <h5>Problemas com Aquecimento</h5>
-                <p>O elevado consumo de energia se traduzia diretamente em produção de calor. Como a eficiência das válvulas era extremamente baixa, a maior parte da energia consumida era convertida em calor, e não em trabalho computacional útil.</p>
-                <p>Isso criava uma série de desafios térmicos:</p>
-                <ul class="list_card">
-                    <li>Temperaturas internas muito altas: o calor acumulado nas salas onde o ENIAC operava fazia com que o ambiente ficasse quase inabitável sem sistemas de ventilação forçada.</li>
-                    <li>Falhas frequentes: o calor era um dos principais responsáveis pelas falhas das válvulas. Estima-se que uma válvula queimava, em média, a cada poucos dias — o que exigia manutenção constante e monitoramento rigoroso.</li>
-                    <li>Necessidade de refrigeração ativa: o ENIAC precisou de sistemas de resfriamento por ar forçado e um projeto cuidadoso para evitar sobreaquecimento local, embora ainda estivesse longe dos padrões modernos de gerenciamento térmico.</li>
-                </ul>
-                <h5>Comparação com Computadores Atuais</h5>
-                <p>Para se ter uma ideia da ineficiência energética do ENIAC, considere que um smartphone moderno é milhões de vezes mais rápido e consome menos de 10 watts. Ou seja, os avanços em microeletrônica e eficiência energética desde os anos 1940 são impressionantes.</p>
-                <p>O ENIAC também marcou o início de um problema que persiste até hoje: o equilíbrio entre potência computacional e consumo de energia. Embora os computadores modernos sejam muito mais eficientes, os data centers atuais — que processam dados em nuvem e sustentam a internet — ainda enfrentam questões similares de consumo e aquecimento, em escala muito maior.</p>
-                <p class="fonte"> Fonte : <a href="https://www.seas.upenn.edu/about/history-heritage/eniac/">PENN </a></p>
-                <a href="#" onclick="history.back()" class="close-btn">Fechar</a>
-            </div>
-        </div>
-        <div id="modal3" class="modal">
-            <div class="modal-content">
-                <h3>Programação Manual por Cabos e Chaves: A Lógica Física do ENIAC</h3>
-                <p>Antes dos sistemas operacionais, das linguagens de programação modernas e até mesmo do conceito de "software" como o conhecemos hoje, a programação de computadores era uma tarefa puramente física e manual. No caso do ENIAC, essa tarefa envolvia o uso de cabos conectores, chaves mecânicas e interruptores, o que tornava o processo extremamente trabalhoso e técnico.</p>
-                <h5>Como funcionava a programação do ENIAC</h5>
-                <p>O ENIAC não possuía memória interna de programa nem instruções armazenadas como os computadores modernos. Em vez disso, ele era uma máquina de propósito geral com arquitetura fixa, cujos comportamentos eram determinados fisicamente pela interconexão dos seus módulos.</p>
-                <p>A programação consistia basicamente em:</p>
-                <ul>
-                    <li>Conectar manualmente cabos entre módulos para definir o caminho dos dados e das instruções;</li>
-                    <li>Ajustar dezenas ou centenas de chaves rotativas e interruptores em painéis para configurar constantes, limites, operações e condições de controle;</li>
-                    <li>Sincronizar unidades de processamento para trabalhar de forma coordenada (como unidades de soma, multiplicação, armazenamento e controle de fluxo).</li>
-                </ul>
-                <p>Esse tipo de programação é chamado de programação física ou "plugboard programming", semelhante ao que também era usado nas antigas centrais telefônicas e em máquinas de cartões perfurados.</p>
-                <h5>Tempo e complexidade</h5>
-                <p>Programar uma nova tarefa no ENIAC não era algo rápido:</p>
-                <ul>
-                    <li>Podia levar dias ou semanas para reconfigurar completamente o sistema para uma nova operação complexa, como cálculos balísticos ou simulações matemáticas.</li>
-                    <li>A equipe precisava de diagramas esquemáticos detalhados do funcionamento lógico da máquina.</li>
-                    <li>Qualquer erro de conexão física — como um cabo mal encaixado ou uma chave ajustada incorretamente — podia causar falhas totais ou resultados errôneos.</li>
-                </ul>
-                <p>Por isso, programar o ENIAC exigia conhecimento técnico profundo, paciência e precisão.</p>
-                <p class="fonte"> Fonte : <a href="https://www.seas.upenn.edu/about/history-heritage/eniac/">PENN </a></p>
-                <a href="#" onclick="history.back()" class="close-btn">Fechar</a>
-
-            </div>
-        </div>
-        <div id="modal4" class="modal">
-            <div class="modal-content">
-                <h3>Velocidade e Precisão: o Avanço que Revolucionou os Cálculos</h3>
-                <p>O ENIAC (Electronic Numerical Integrator and Computer) representou uma transformação radical na capacidade de processamento numérico do século XX. Ao utilizar válvulas eletrônicas em vez de relés eletromecânicos, ele foi capaz de atingir velocidades nunca antes vistas. Podia executar cerca de 5 mil somas ou subtrações por segundo, 385 multiplicações e 40 divisões nesse mesmo intervalo — algo revolucionário para a época.</p>
-                <p>Seu projeto contava com 20 acumuladores de 10 dígitos, que podiam operar em paralelo, permitindo a realização de cálculos simultâneos, uma inovação que antecipava o conceito de processamento paralelo. A precisão também era um destaque: os dados eram processados com uma exatidão de até dez dígitos decimais, um feito essencial para aplicações balísticas, científicas e meteorológicas da época.</p>
-                <p>Essa combinação entre alta velocidade e rigor numérico tornou o ENIAC indispensável para projetos complexos, como simulações de explosões, previsões meteorológicas e desenvolvimento de armamentos, abrindo caminho para a computação científica moderna.</p>
-                <p class="fonte"> Fonte : <a href="https://www.seas.upenn.edu/about/history-heritage/eniac/">PENN </a></p>
-                <a href="#" onclick="history.back()" class="close-btn">Fechar</a>
-            </div>
-        </div>
-
-    </div>
 </body>
 </html>
