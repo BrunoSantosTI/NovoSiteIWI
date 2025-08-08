@@ -64,21 +64,42 @@
                     </div>
 
                     <div class="dados-form">
-                        <label for="era">Para qual geração da evolução dos computadores</label>
+                        <label for="era">Para qual geração da evolução dos computadores você gostaria de estar?</label>
+                        <select id="area" name="area">
+                            <option name="era" value="Primeira">Primeira Geração (1940-1956)</option>
+                            <option name="era" value="Segunda">Segunda Geração (1956-1963)</option>
+                            <option name="era" value="Terceira">Terceira Geração (1964-1971)</option>
+                            <option name="era" value="Quarta">Quarta Geração (1971-presente)</option>
+                            <option name="era" value="Quinta">Quinta Geração (1980-presente)</option>
+                        </select>
+                        
+                    </div>
+                    
+                    <div class="dados-form">
+                        <label for="infos">Quais dessas informações você já sabia sobre o ENIAC?</label>
+                        <input type="checkbox" name="uso[]" value="primeroPC">Foi o primeiro computador já inventado.
+                        <input type="checkbox" name="uso[]" value="colossal">Era um computador colossal.
+                        <input type="checkbox" name="uso[]" value="energia">Exigia muita energia, essa suficiente para abastecer diversas residências.
+                        <input type="checkbox" name="uso[]" value="manual">Tudo nele era feito manualmente por não armazenar programas.
+                        <input type="checkbox" name="uso[]" value="veloz">Que, apesar de seu tamanho, o ENIAC era muito veloz e eficiente para algumas situações.
+                    </div>
+                    
+                    <div class="dados-form">
+                        <label for="area">Já ingressou em alguma área relacionada à computação? Se sim, qual?</label>
+                        <input type="radio" name="area" value="nao">Não, nunca ingressei.
+                        <input type="radio" name="area" value="maisoumenos">Não, mas tenho interesse.
+                        <input type="radio" name="area" value="design">Sim, ingressei na área de design gráfico.
+                        <input type="radio" name="area" value="devsoft">Sim, ingressei na área de desenvolvimento de sofwares.
+                        <input type="radio" name="area" value="engsoft">Sim, ingressei na área de engenharia de software.
+                        <input type="radio" name="area" value="analise">Sim, ingressei na área de análise de dados.
+                        <input type="radio" name="area" value="semopcao">Sim, mas não há a opção específica.
                         
                         
                     </div>
                     
                     <div class="dados-form">
-                        
-                    </div>
-                    
-                    <div class="dados-form">
-
-                    </div>
-                    
-                    <div class="dados-form">
-                        
+                        <label for="cor">Qual cor mais combina com o ENIAC?</label>
+                        <input type="color" id="cor" name="cor">
                     </div>
                     
                     <div class="dados-form">
