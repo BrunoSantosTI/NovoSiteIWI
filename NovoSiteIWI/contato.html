@@ -43,24 +43,23 @@
                 <form class="formulario-contato" action="https://formsubmit.co/bruno.santos1454@etec.sp.gov.br" method="post">
                     <div class="dados-form">
                         <label for="nome">Nome completo</label>
-                        <input type="text" id="nome" name="nome" required>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo..." required>
                     </div>
 
                     <div class="dados-form">
                         <label for="email">Endereço de E-mail</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="exemplo@..." required>
 
                     </div>
 
                     <div class="dados-form">
                         <label for="idade">Idade</label>
-                        <input type="number" id="idade" name="idade" min="7" max="130" required>
+                        <input type="number" id="idade" name="idade" min="7" max="130" placeholder="D" required>
                     </div>
 
                     <div class="dados-form">
                         <label for="interesse">Quando começou o seu interesse pelo ENIAC(aproximadamente)</label>
                         <input type="month" id="interesse" name="interesse">
-                        <input type="submit" value="Submit">
                     </div>
 
                     <div class="dados-form">
@@ -76,17 +75,18 @@
                     </div>
                     
                     <div class="dados-form">
-                        <label for="infos">Quais dessas informações você já sabia sobre o ENIAC?</label>
-                        <input type="checkbox" name="uso[]" value="primeroPC">Foi o primeiro computador já inventado.
-                        <input type="checkbox" name="uso[]" value="colossal">Era um computador colossal.
-                        <input type="checkbox" name="uso[]" value="energia">Exigia muita energia, essa suficiente para abastecer diversas residências.
-                        <input type="checkbox" name="uso[]" value="manual">Tudo nele era feito manualmente por não armazenar programas.
-                        <input type="checkbox" name="uso[]" value="veloz">Que, apesar de seu tamanho, o ENIAC era muito veloz e eficiente para algumas situações.
+                        <label for="infos">
+                            <p>Quais dessas informações você já sabia sobre o ENIAC?</p>
+                            <input type="checkbox" name="uso[]" value="primeroPC" >Foi o primeiro computador já inventado.
+                            <input type="checkbox" name="uso[]" value="colossal">Era um computador colossal.
+                            <input type="checkbox" name="uso[]" value="energia">Exigia muita energia, essa suficiente para abastecer diversas residências.
+                            <input type="checkbox" name="uso[]" value="manual">Tudo nele era feito manualmente por não armazenar programas.
+                            <input type="checkbox" name="uso[]" value="veloz">Que, apesar de seu tamanho, o ENIAC era muito veloz e eficiente para algumas situações.
+                        </label><br>
                     </div>
                     
                     <div class="dados-form">
-                        <label for="area">Já ingressou em alguma área relacionada à computação? Se sim, qual?</label>
-                        <input type="radio" name="area" value="nao">Não, nunca ingressei.
+                        <label for="area">Já ingressou em alguma área relacionada à computação? Se sim, qual?</label><br>
                         <input type="radio" name="area" value="maisoumenos">Não, mas tenho interesse.
                         <input type="radio" name="area" value="design">Sim, ingressei na área de design gráfico.
                         <input type="radio" name="area" value="devsoft">Sim, ingressei na área de desenvolvimento de sofwares.
