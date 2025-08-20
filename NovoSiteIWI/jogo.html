@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENIAC</title>
+    <link rel="shortcut icon" href="ImagensIWI/Favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Rose:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CssExternoNovoSite/styleJOGO.css">
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">INFOTEC</a>
+
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#historia">História do ENIAC</a></li>
+                    <li><a href="index.html#caracteristicas">Características e Funcionamento</a></li>
+                    <li><a href="index.html#galeria">Galeria de Imagens</a></li>
+                    <li><a href="jogo.html">Jogo</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </header>
+    <section id="inicio" class="banner">
+       <h1>ENIAC</h1>
+       <h2>Descubra sobre o Primeiro Computador!!</h2>
+
+    </section>
+    <section id="areadojogo">
+        <div id="title">Jogo do ENIAC<br>Conserte o computador pegando os cabos!</div>
+        <div id="gameArea">
+        <div id="player"></div>
+        <div id="cable"></div>
+        </div>
+        <div id="score">Cabos conectados: 0</div>
+    
+        <script>
+            const player = document.getElementById("player");
+            const cable = document.getElementById("cable");
+            const gameArea = document.getElementById("gameArea");
+            const scoreDisplay = document.getElementById("score");
+        
+            let playerX = 50, playerY = 50;
+            let score = 0;
+        
+            // Gera posição aleatória para o "cabo"
+            function placeCable() {
+                const x = Math.floor(Math.random() * (gameArea.clientWidth - 25));
+                const y = Math.floor(Math.random() * (gameArea.clientHeight - 25));
+                cable.style.left = x + "px";
+                cable.style.top = y + "px";
+            }
+        
+            // Movimento do jogador
+            document.addEventListener("keydown", (e) => {
+                const step = 10;
+
+                if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+                    e.preventDefault(); // <- impede a página de rolar
+                }
+
+                if (e.key === "ArrowUp" && playerY > 0) playerY -= step;
+                if (e.key === "ArrowDown" && playerY < gameArea.clientHeight - 40) playerY += step;
+                if (e.key === "ArrowLeft" && playerX > 0) playerX -= step;
+                if (e.key === "ArrowRight" && playerX < gameArea.clientWidth - 40) playerX += step;
+
+                player.style.left = playerX + "px";
+                player.style.top = playerY + "px";
+
+                checkCollision();
+            });
+        
+            // Verifica se o técnico pegou o cabo
+            function checkCollision() {
+                const playerRect = player.getBoundingClientRect();
+                const cableRect = cable.getBoundingClientRect();
+        
+                if (
+                playerRect.left < cableRect.right &&
+                playerRect.right > cableRect.left &&
+                playerRect.top < cableRect.bottom &&
+                playerRect.bottom > cableRect.top
+                ) {
+                score++;
+                scoreDisplay.textContent = "Cabos conectados: " + score;
+                placeCable();
+                }
+            }
+        
+            placeCable();
+        </script>
+    </section>
+</body>
+</html>
