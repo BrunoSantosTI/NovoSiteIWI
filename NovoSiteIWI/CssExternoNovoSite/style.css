@@ -107,74 +107,6 @@ header .container{
     flex-direction: column;
 }
 
-.banner_contato{
-    background: url(../ImagensIWI/banner_contato.jpg) no-repeat center/cover;
-    padding: 15px;
-    margin-top: 107px;
-    height: 400px;
-    display: flex;
-    align-items: left;
-    justify-content: center;
-    color:#f2f6f0;
-    font-size: 1.5em;
-    flex-direction: column;
-
-}
-
-.title_ctt{
-    text-align: center;
-    font-size: 1.5em;
-    padding: 1%;
-}
-
-.formulario-contato{
-    background-color: #fafafa;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 80%;
-    width: 100%;
-    margin: auto;
-    justify-content: center;
-    text-align: left;
-}
-
-.dados-form{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    
-    padding: 0.5%;
-}
-
-.dados-form input,
-.dados-form select,
-.dados-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1em;
-    margin-top: 8px;
-}
-
-.dados-form input[type="checkbox"],
-.dados-form input[type="radio"] {
-    margin-right: 8px;
-    margin-top: 0;
-   
-
-
-}
-
-.dados-form label {
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="range"] {
-    accent-color: #09092d;
-}  
-
 #inicio h1{
     text-shadow: 0 0 10px #26077a;
     font-size: 50px;
@@ -444,4 +376,143 @@ input[type="range"] {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
+}
+
+.banner_contato{
+    background: url(../ImagensIWI/banner_contato.jpg) no-repeat center/cover;
+    padding: 15px;
+    margin-top: 107px;
+    height: 400px;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    color:#f2f6f0;
+    font-size: 1.5em;
+    flex-direction: column;
+
+}
+
+.title-base{
+    text-align: center;
+    font-size: 1.5em;
+    padding: 1%;
+}
+
+.formulario-contato{
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    text-align: left;
+}
+
+.dados-form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 0.5%;
+}
+
+.dados-form input,
+.dados-form select,
+.dados-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    margin-top: 8px;
+}
+
+.dados-form input[type="checkbox"],
+.dados-form input[type="radio"] {
+    margin-right: 8px;
+    margin-top: 0;
+
+}
+
+
+.dados-form label[for="nome"],
+.dados-form label[for="email"],
+.dados-form label[for="idade"],
+.dados-form label[for="interesse"],
+.dados-form label[for="era"],
+.dados-form label[for="infos"],
+.dados-form label[for="area"],
+.dados-form label[for="cor"],
+.dados-form label[for="grau-interesse"],
+.dados-form label[for="historia-form"]{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    accent-color: #09092d;
+}
+
+.btn-form{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #09092d;
+    color: #f2f6f0;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
+
+body.pg-mensagem{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.pg-mensagem main{
+    flex: 1;
+}
+
+.tabela-container{
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabela-container table{
+    min-width: 90%;
+}
+
+.tabela-eniac{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    background-color: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabela-eniac th, 
+.tabela-eniac td{
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 255, 224, 0.3);
+}
+
+.tabela-eniac thead{
+    color: #f2f6f0;
+    background-color:#09092d;
+    font-weight: bold;
+}
+
+.tabela-eniac tbody tr:hover {
+    background-color: rgba(0, 255, 224, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.tabela-eniac tbody tr:last-child td{
+    border-bottom: none;
 }

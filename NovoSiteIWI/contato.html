@@ -39,7 +39,7 @@
         
         <section id="contato">
             <div class="container">
-                <h1 class="title_ctt">Contato</h1>
+                <h1 class="title_base">Contato</h1>
                 <form class="formulario-contato" action="https://formsubmit.co/bruno.santos1454@etec.sp.gov.br" method="post">
                     <div class="dados-form">
                         <label for="nome">Nome completo</label>
@@ -54,11 +54,11 @@
 
                     <div class="dados-form">
                         <label for="idade">Idade</label>
-                        <input type="number" id="idade" name="idade" min="7" max="130" placeholder="D" required>
+                        <input type="number" id="idade" name="idade" min="7" max="130" placeholder="Idade" required>
                     </div>
 
                     <div class="dados-form">
-                        <label for="interesse">Quando começou o seu interesse pelo ENIAC(aproximadamente)</label>
+                        <label for="interesse">Quando começou o seu interesse pelo ENIAC (aproximadamente)</label>
                         <input type="month" id="interesse" name="interesse">
                     </div>
 
@@ -75,25 +75,55 @@
                     </div>
                     
                     <div class="dados-form">
-                        <label for="infos">
-                            <p>Quais dessas informações você já sabia sobre o ENIAC?</p>
-                            <input type="checkbox" name="uso[]" value="primeroPC" >Foi o primeiro computador já inventado.
-                            <input type="checkbox" name="uso[]" value="colossal">Era um computador colossal.
-                            <input type="checkbox" name="uso[]" value="energia">Exigia muita energia, essa suficiente para abastecer diversas residências.
-                            <input type="checkbox" name="uso[]" value="manual">Tudo nele era feito manualmente por não armazenar programas.
-                            <input type="checkbox" name="uso[]" value="veloz">Que, apesar de seu tamanho, o ENIAC era muito veloz e eficiente para algumas situações.
-                        </label><br>
+                        <label for="infos">Quais dessas informações você já sabia sobre o ENIAC?</label>
+                        <label>
+                            <input type="checkbox" name="uso[]" value="primeroPC">
+                            Foi o primeiro computador já inventado.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="uso[]" value="colossal">
+                            Era um computador colossal.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="uso[]" value="energia">
+                            Exigia muita energia, essa suficiente para abastecer diversas residências.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="uso[]" value="manual">
+                            Tudo nele era feito manualmente por não armazenar programas.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="uso[]" value="veloz">
+                            Que, apesar de seu tamanho, o ENIAC era muito veloz e eficiente para algumas situações.
+                        </label>
                     </div>
                     
                     <div class="dados-form">
-                        <label for="area">Já ingressou em alguma área relacionada à computação? Se sim, qual?</label><br>
-                        <input type="radio" name="area" value="maisoumenos">Não, mas tenho interesse.
-                        <input type="radio" name="area" value="design">Sim, ingressei na área de design gráfico.
-                        <input type="radio" name="area" value="devsoft">Sim, ingressei na área de desenvolvimento de sofwares.
-                        <input type="radio" name="area" value="engsoft">Sim, ingressei na área de engenharia de software.
-                        <input type="radio" name="area" value="analise">Sim, ingressei na área de análise de dados.
-                        <input type="radio" name="area" value="semopcao">Sim, mas não há a opção específica.
-                        
+                        <label for="area">Já ingressou em alguma área relacionada à computação? Se sim, qual?</label>
+                        <label>
+                            <input type="radio" name="area" value="maisoumenos">
+                            Não, mas tenho interesse.
+                        </label>
+                        <label>
+                            <input type="radio" name="area" value="design">
+                            Sim, ingressei na área de design gráfico.
+                        </label>
+                        <label>
+                            <input type="radio" name="area" value="devsoft">
+                            Sim, ingressei na área de desenvolvimento de sofwares.
+                        </label>
+                        <label>
+                            <input type="radio" name="area" value="engsoft">
+                            Sim, ingressei na área de engenharia de software.
+                        </label>
+                        <label>
+                            <input type="radio" name="area" value="analise">
+                            Sim, ingressei na área de análise de dados.
+                        </label>
+                        <label>
+                            <input type="radio" name="area" value="semopcao">
+                            Sim, mas não há a opção específica.
+                        </label>
                         
                     </div>
                     
@@ -110,12 +140,12 @@
                     
                     <div class="dados-form">
                         <label for="historia-form">Conte-nos um pouco de uma história com a tecnologia</label>
-                        <textarea name="historia-form" id="historia-form" rows="10"></textarea>
+                        <textarea name="historia-form" id="historia-form" rows="10" placeholder="Sua história..."></textarea>
                         
                     </div>
                     
                     <div class="dados-form-centro">
-                        <button type="submit" class="btn">Enviar</button>
+                        <button type="submit" class="btn-form">Enviar</button>
                         <input type="hidden" name="_captcha" value="false"> 
                         <input type="hidden" name="_next" value="https://brunosantosti.github.io/NovoSiteIWI/NovoSiteIWI/succesful.html"> 
                         
