@@ -141,9 +141,14 @@ header .container{
 
 #title {
     text-align: center;
-    font-size: 24px;
-    margin-top: 15px;
-    color: #0f0;
+    font-size: 1.5em;
+    padding: 1%;
+    color: #09092d;
+    font-weight: bold;
+}
+
+#title h2{
+    font-size: 1;
 }
 
 .container{
