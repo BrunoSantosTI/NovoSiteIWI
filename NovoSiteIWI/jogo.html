@@ -3,105 +3,1043 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENIAC</title>
-    <link rel="shortcut icon" href="ImagensIWI/Favicon.png" type="image/x-icon">
+    <title>Labirinto do ENIAC - Conecte o Cabo!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Rose:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CssExternoNovoSite/styleJOGO.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d2d5f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Header com position relative para controle de layout */
+        .game-header {
+            position: relative;
+            text-align: center;
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #00ff88;
+        }
+
+        .header-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .game-subtitle {
+            font-size: 1.1rem;
+            color: #cccccc;
+            position: relative;
+        }
+
+        /* Container principal do jogo - position relative como base */
+        .game-main {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Informações do jogo - position fixed para sempre visível */
+        .game-info {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff88;
+            z-index: 100;
+            min-width: 200px;
+        }
+
+        .score-display, .level-display, .timer-display {
+            position: relative;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .score-label, .level-label, .timer-label {
+            color: #cccccc;
+            font-weight: bold;
+        }
+
+        .score-value, .level-value, .timer-value {
+            color: #00ff88;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+        }
+
+        /* Container do jogo - position relative para servir de referência */
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            background: #1a1a2e;
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Labirinto - position relative para conter elementos absolutos */
+        .maze {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #16213e 0%, #0f0f23 100%);
+        }
+
+        /* PAREDES - Uso extensivo de position absolute */
+        .wall {
+            position: absolute;
+            background: linear-gradient(45deg, #333366, #4444aa);
+            border: 2px solid #5555cc;
+            box-shadow: inset 0 0 10px rgba(85, 85, 204, 0.5);
+        }
+
+        /* Paredes horizontais */
+        .wall-horizontal {
+            height: 20px;
+            border-radius: 10px;
+        }
+
+        /* Paredes verticais */
+        .wall-vertical {
+            width: 20px;
+            border-radius: 10px;
+        }
+
+        /* Blocos de parede */
+        .wall-block {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+        }
+
+        /* Posicionamento específico das paredes usando position absolute */
+        [data-wall="top-1"] {
+            top: 50px;
+            left: 100px;
+            width: 200px;
+        }
+
+        [data-wall="top-2"] {
+            top: 50px;
+            left: 400px;
+            width: 150px;
+        }
+
+        [data-wall="top-3"] {
+            top: 50px;
+            left: 650px;
+            width: 100px;
+        }
+
+        [data-wall="left-1"] {
+            top: 150px;
+            left: 50px;
+            height: 200px;
+        }
+
+        [data-wall="left-2"] {
+            top: 400px;
+            left: 50px;
+            height: 150px;
+        }
+
+        [data-wall="right-1"] {
+            top: 150px;
+            right: 50px;
+            height: 180px;
+        }
+
+        [data-wall="right-2"] {
+            top: 380px;
+            right: 50px;
+            height: 170px;
+        }
+
+        [data-wall="block-1"] {
+            top: 150px;
+            left: 200px;
+        }
+
+        [data-wall="block-2"] {
+            top: 150px;
+            left: 350px;
+        }
+
+        [data-wall="block-3"] {
+            top: 150px;
+            left: 500px;
+        }
+
+        [data-wall="block-4"] {
+            top: 300px;
+            left: 150px;
+        }
+
+        [data-wall="block-5"] {
+            top: 300px;
+            left: 300px;
+        }
+
+        [data-wall="block-6"] {
+            top: 300px;
+            left: 450px;
+        }
+
+        [data-wall="block-7"] {
+            top: 450px;
+            left: 250px;
+        }
+
+        [data-wall="block-8"] {
+            top: 450px;
+            left: 400px;
+        }
+
+        /* COLETÁVEIS - position absolute para posicionamento preciso */
+        .collectible {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #ffff00 0%, #ffaa00 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffff00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Posicionamento dos coletáveis */
+        [data-collectible="1"] { top: 120px; left: 120px; }
+        [data-collectible="2"] { top: 120px; left: 320px; }
+        [data-collectible="3"] { top: 120px; left: 520px; }
+        [data-collectible="4"] { top: 220px; left: 180px; }
+        [data-collectible="5"] { top: 220px; left: 380px; }
+        [data-collectible="6"] { top: 370px; left: 200px; }
+        [data-collectible="7"] { top: 370px; left: 350px; }
+        [data-collectible="8"] { top: 370px; left: 500px; }
+        [data-collectible="9"] { top: 520px; left: 180px; }
+        [data-collectible="10"] { top: 520px; left: 420px; }
+
+        /* PLAYER (CABO) - position absolute para movimento livre */
+        .player {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            width: 30px;
+            height: 30px;
+            z-index: 50;
+            transition: all 0.2s ease;
+        }
+
+        .cable-head {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+        }
+
+        .cable-head::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .cable-head::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .cable-body {
+            position: absolute;
+            top: 25px;
+            left: 12px;
+            width: 6px;
+            height: 15px;
+            background: #333333;
+            border-radius: 3px;
+        }
+
+        /* TOMADA (OBJETIVO) - position absolute para posicionamento final */
+        .socket {
+            position: absolute;
+            bottom: 80px;
+            right: 80px;
+            width: 50px;
+            height: 50px;
+            z-index: 40;
+        }
+
+        .socket-holes {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            border: 3px solid #333333;
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+        }
+
+        .hole {
+            position: absolute;
+            background: #333333;
+            border-radius: 50%;
+        }
+
+        .hole-1 {
+            top: 12px;
+            left: 12px;
+            width: 8px;
+            height: 8px;
+        }
+
+        .hole-2 {
+            top: 12px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+        }
+
+        .hole-3 {
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 6px;
+            border-radius: 6px;
+        }
+
+        .socket-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+            border-radius: 15px;
+            animation: socketGlow 3s infinite;
+        }
+
+        @keyframes socketGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Controles - position relative para layout normal */
+        .game-controls {
+            position: relative;
+            margin-top: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #444444;
+        }
+
+        .controls-info h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .control-item {
+            position: relative;
+            display: inline-block;
+            margin: 0 20px 10px 0;
+        }
+
+        .key {
+            background: #333333;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .description {
+            color: #cccccc;
+        }
+
+        /* Mensagem do jogo - position fixed para overlay */
+        .game-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .game-message.hidden {
+            display: none;
+        }
+
+        .message-content {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a3a, #2d2d5f);
+            padding: 40px;
+            border-radius: 15px;
+            border: 3px solid #00ff88;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
+        }
+
+        .message-title {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .message-text {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .message-button {
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .message-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+        }
+
+        /* Container de partículas - position absolute para efeitos */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 30;
+        }
+
+        /* Footer - position relative para layout normal */
+        .game-footer {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid #444444;
+            margin-top: 40px;
+        }
+
+        .game-footer p {
+            color: #888888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .game-container {
+                width: 90%;
+                height: 500px;
+            }
+            
+            .game-info {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+            }
+            
+            .game-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .game-container {
+                height: 400px;
+            }
+            
+            .control-item {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">INFOTEC</a>
-
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html#inicio">Início</a></li>
-                    <li><a href="index.html#historia">História do ENIAC</a></li>
-                    <li><a href="index.html#caracteristicas">Características e Funcionamento</a></li>
-                    <li><a href="index.html#galeria">Galeria de Imagens</a></li>
-                    <li><a href="jogo.html">Jogo</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-
-            </nav>
+    <header class="game-header">
+        <div class="header-container">
+            <h1 class="game-title">🔌 Labirinto do ENIAC</h1>
+            <p class="game-subtitle">Conecte o cabo à tomada navegando pelo labirinto!</p>
         </div>
     </header>
-    <section id="inicio" class="banner">
-       <h1>ENIAC</h1>
-       <h2>Descubra sobre o Primeiro Computador!!</h2>
 
-    </section>
-    <section id="areadojogo">
-        <div id="title">
-            <h1 class="title-h1">Jogo do ENIAC</h1>
-            <h2 class="title-h2">Conserte o computador pegando os cabos!</h2>
+    <main class="game-main">
+        <div class="game-info">
+            <div class="score-display">
+                <span class="score-label">Pontuação:</span>
+                <span id="score" class="score-value">0</span>
+            </div>
+            <div class="level-display">
+                <span class="level-label">Nível:</span>
+                <span id="level" class="level-value">1</span>
+            </div>
+            <div class="timer-display">
+                <span class="timer-label">Tempo:</span>
+                <span id="timer" class="timer-value">60</span>s
+            </div>
         </div>
-        <div id="gameArea">
-            <div id="player"></div>
-            <div id="socket"></div>
+
+        <div id="gameContainer" class="game-container">
+            <!-- Labirinto será gerado dinamicamente -->
+            <div id="maze" class="maze">
+                <!-- Paredes do labirinto -->
+                <div class="wall wall-horizontal" data-wall="top-1"></div>
+                <div class="wall wall-horizontal" data-wall="top-2"></div>
+                <div class="wall wall-horizontal" data-wall="top-3"></div>
+                <div class="wall wall-vertical" data-wall="left-1"></div>
+                <div class="wall wall-vertical" data-wall="left-2"></div>
+                <div class="wall wall-vertical" data-wall="right-1"></div>
+                <div class="wall wall-vertical" data-wall="right-2"></div>
+                <div class="wall wall-block" data-wall="block-1"></div>
+                <div class="wall wall-block" data-wall="block-2"></div>
+                <div class="wall wall-block" data-wall="block-3"></div>
+                <div class="wall wall-block" data-wall="block-4"></div>
+                <div class="wall wall-block" data-wall="block-5"></div>
+                <div class="wall wall-block" data-wall="block-6"></div>
+                <div class="wall wall-block" data-wall="block-7"></div>
+                <div class="wall wall-block" data-wall="block-8"></div>
+                
+                <!-- Pontos coletáveis (representando fios/conexões) -->
+                <div class="collectible" data-collectible="1"></div>
+                <div class="collectible" data-collectible="2"></div>
+                <div class="collectible" data-collectible="3"></div>
+                <div class="collectible" data-collectible="4"></div>
+                <div class="collectible" data-collectible="5"></div>
+                <div class="collectible" data-collectible="6"></div>
+                <div class="collectible" data-collectible="7"></div>
+                <div class="collectible" data-collectible="8"></div>
+                <div class="collectible" data-collectible="9"></div>
+                <div class="collectible" data-collectible="10"></div>
+            </div>
+
+            <!-- Player (cabo) -->
+            <div id="player" class="player">
+                <div class="cable-head"></div>
+                <div class="cable-body"></div>
+            </div>
+
+            <!-- Objetivo (tomada) -->
+            <div id="socket" class="socket">
+                <div class="socket-holes">
+                    <div class="hole hole-1"></div>
+                    <div class="hole hole-2"></div>
+                    <div class="hole hole-3"></div>
+                </div>
+                <div class="socket-glow"></div>
+            </div>
+
+            <!-- Efeitos visuais -->
+            <div id="particles" class="particles-container"></div>
         </div>
-        <div id="score">Tomadas conectadas: 0</div>
-    
-        <script>
-            const player = document.getElementById("player");
-            const socket = document.getElementById("socket");
-            const gameArea = document.getElementById("gameArea");
-            const scoreDisplay = document.getElementById("score");
-        
-            let playerX = 50, playerY = 50;
-            let score = 0;
-        
-            // Coloca a "tomada de parede" em posição aleatória
-            function placeSocket() {
-              const x = Math.floor(Math.random() * (gameArea.clientWidth - 50));
-              const y = Math.floor(Math.random() * (gameArea.clientHeight - 50));
-              socket.style.left = x + "px";
-              socket.style.top = y + "px";
+
+        <div class="game-controls">
+            <div class="controls-info">
+                <h3>Controles:</h3>
+                <div class="control-item">
+                    <span class="key">↑ ↓ ← →</span>
+                    <span class="description">Mover o cabo</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">ESPAÇO</span>
+                    <span class="description">Pausar/Continuar</span>
+                </div>
+                <div class="control-item">
+                    <span class="key">R</span>
+                    <span class="description">Reiniciar nível</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameMessage" class="game-message hidden">
+            <div class="message-content">
+                <h2 id="messageTitle" class="message-title"></h2>
+                <p id="messageText" class="message-text"></p>
+                <button id="messageButton" class="message-button">Continuar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="game-footer">
+        <p>&copy; 2024 Labirinto do ENIAC - Conecte-se ao futuro da computação!</p>
+    </footer>
+
+    <script>
+        // Elementos do DOM
+        const player = document.getElementById("player");
+        const socket = document.getElementById("socket");
+        const gameContainer = document.getElementById("gameContainer");
+        const scoreDisplay = document.getElementById("score");
+        const levelDisplay = document.getElementById("level");
+        const timerDisplay = document.getElementById("timer");
+        const gameMessage = document.getElementById("gameMessage");
+        const messageTitle = document.getElementById("messageTitle");
+        const messageText = document.getElementById("messageText");
+        const messageButton = document.getElementById("messageButton");
+        const particlesContainer = document.getElementById("particles");
+
+        // Estado do jogo
+        let gameState = {
+            playerX: 80,
+            playerY: 80,
+            score: 0,
+            level: 1,
+            timeLeft: 60,
+            isPlaying: false,
+            isPaused: false,
+            collectiblesRemaining: 10,
+            gameTimer: null,
+            moveSpeed: 10
+        };
+
+        // Configurações do labirinto
+        const mazeConfig = {
+            width: 800,
+            height: 600,
+            walls: [
+                // Paredes horizontais
+                { x: 100, y: 50, width: 200, height: 20 },
+                { x: 400, y: 50, width: 150, height: 20 },
+                { x: 650, y: 50, width: 100, height: 20 },
+                
+                // Paredes verticais
+                { x: 50, y: 150, width: 20, height: 200 },
+                { x: 50, y: 400, width: 20, height: 150 },
+                { x: 730, y: 150, width: 20, height: 180 },
+                { x: 730, y: 380, width: 20, height: 170 },
+                
+                // Blocos
+                { x: 200, y: 150, width: 60, height: 60 },
+                { x: 350, y: 150, width: 60, height: 60 },
+                { x: 500, y: 150, width: 60, height: 60 },
+                { x: 150, y: 300, width: 60, height: 60 },
+                { x: 300, y: 300, width: 60, height: 60 },
+                { x: 450, y: 300, width: 60, height: 60 },
+                { x: 250, y: 450, width: 60, height: 60 },
+                { x: 400, y: 450, width: 60, height: 60 }
+            ]
+        };
+
+        // Inicialização do jogo
+        function initGame() {
+            resetPlayerPosition();
+            updateDisplay();
+            showMessage("🔌 Labirinto do ENIAC", "Use as setas para mover o cabo até a tomada!<br>Colete os fios dourados para ganhar pontos!", "Iniciar Jogo");
+            
+            // Event listeners
+            document.addEventListener("keydown", handleKeyPress);
+            messageButton.addEventListener("click", handleMessageButton);
+            
+            console.log("Jogo inicializado!");
+        }
+
+        // Reset da posição do player
+        function resetPlayerPosition() {
+            gameState.playerX = 80;
+            gameState.playerY = 80;
+            updatePlayerPosition();
+        }
+
+        // Atualização da posição visual do player
+        function updatePlayerPosition() {
+            player.style.left = gameState.playerX + "px";
+            player.style.top = gameState.playerY + "px";
+        }
+
+        // Atualização do display de informações
+        function updateDisplay() {
+            scoreDisplay.textContent = gameState.score;
+            levelDisplay.textContent = gameState.level;
+            timerDisplay.textContent = gameState.timeLeft;
+        }
+
+        // Manipulação de teclas
+        function handleKeyPress(event) {
+            if (!gameState.isPlaying || gameState.isPaused) return;
+
+            const key = event.key;
+            let newX = gameState.playerX;
+            let newY = gameState.playerY;
+
+            // Prevenção do scroll da página
+            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(key)) {
+                event.preventDefault();
             }
-        
-            // Movimento do jogador
-            document.addEventListener("keydown", (e) => {
-              const step = 10;
-        
-              if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-                e.preventDefault(); // impede scroll do site
-              }
-        
-              if (e.key === "ArrowUp" && playerY > 0) playerY -= step;
-              if (e.key === "ArrowDown" && playerY < gameArea.clientHeight - 40) playerY += step;
-              if (e.key === "ArrowLeft" && playerX > 0) playerX -= step;
-              if (e.key === "ArrowRight" && playerX < gameArea.clientWidth - 40) playerX += step;
-        
-              player.style.left = playerX + "px";
-              player.style.top = playerY + "px";
-        
-              checkCollision();
+
+            // Movimento
+            switch (key) {
+                case "ArrowUp":
+                    newY = Math.max(0, gameState.playerY - gameState.moveSpeed);
+                    break;
+                case "ArrowDown":
+                    newY = Math.min(mazeConfig.height - 30, gameState.playerY + gameState.moveSpeed);
+                    break;
+                case "ArrowLeft":
+                    newX = Math.max(0, gameState.playerX - gameState.moveSpeed);
+                    break;
+                case "ArrowRight":
+                    newX = Math.min(mazeConfig.width - 30, gameState.playerX + gameState.moveSpeed);
+                    break;
+                case " ":
+                    togglePause();
+                    return;
+                case "r":
+                case "R":
+                    restartLevel();
+                    return;
+            }
+
+            // Verificação de colisão com paredes
+            if (!checkWallCollision(newX, newY)) {
+                gameState.playerX = newX;
+                gameState.playerY = newY;
+                updatePlayerPosition();
+                
+                // Verificações após movimento
+                checkCollectibleCollection();
+                checkSocketConnection();
+            }
+        }
+
+        // Verificação de colisão com paredes
+        function checkWallCollision(x, y) {
+            const playerRect = {
+                x: x,
+                y: y,
+                width: 30,
+                height: 30
+            };
+
+            return mazeConfig.walls.some(wall => {
+                return playerRect.x < wall.x + wall.width &&
+                       playerRect.x + playerRect.width > wall.x &&
+                       playerRect.y < wall.y + wall.height &&
+                       playerRect.y + playerRect.height > wall.y;
             });
-        
-            // Verifica se a "cabeça da tomada" encaixou na "tomada da parede"
-            function checkCollision() {
-              const playerRect = player.getBoundingClientRect();
-              const socketRect = socket.getBoundingClientRect();
-        
-              if (
-                playerRect.left < socketRect.right &&
-                playerRect.right > socketRect.left &&
-                playerRect.top < socketRect.bottom &&
-                playerRect.bottom > socketRect.top
-              ) {
-                score++;
-                scoreDisplay.textContent = "Tomadas conectadas: " + score;
-                placeSocket();
-              }
+        }
+
+        // Verificação de coleta de itens
+        function checkCollectibleCollection() {
+            const collectibles = document.querySelectorAll('.collectible:not(.collected)');
+            const playerRect = {
+                x: gameState.playerX,
+                y: gameState.playerY,
+                width: 30,
+                height: 30
+            };
+
+            collectibles.forEach(collectible => {
+                const rect = collectible.getBoundingClientRect();
+                const containerRect = gameContainer.getBoundingClientRect();
+                
+                const collectibleRect = {
+                    x: rect.left - containerRect.left,
+                    y: rect.top - containerRect.top,
+                    width: 12,
+                    height: 12
+                };
+
+                if (playerRect.x < collectibleRect.x + collectibleRect.width &&
+                    playerRect.x + playerRect.width > collectibleRect.x &&
+                    playerRect.y < collectibleRect.y + collectibleRect.height &&
+                    playerRect.y + playerRect.height > collectibleRect.y) {
+                    
+                    collectItem(collectible);
+                }
+            });
+        }
+
+        // Coleta de item
+        function collectItem(collectible) {
+            collectible.classList.add('collected');
+            collectible.style.display = 'none';
+            
+            gameState.score += 100;
+            gameState.collectiblesRemaining--;
+            
+            updateDisplay();
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#ffff00');
+            
+            // Som de coleta (simulado com vibração visual)
+            player.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                player.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        // Verificação de conexão com a tomada
+        function checkSocketConnection() {
+            const socketRect = socket.getBoundingClientRect();
+            const containerRect = gameContainer.getBoundingClientRect();
+            const playerRect = {
+                x: gameState.playerX,
+                y: gameState.playerY,
+                width: 30,
+                height: 30
+            };
+
+            const socketGameRect = {
+                x: socketRect.left - containerRect.left,
+                y: socketRect.top - containerRect.top,
+                width: 50,
+                height: 50
+            };
+
+            if (playerRect.x < socketGameRect.x + socketGameRect.width &&
+                playerRect.x + playerRect.width > socketGameRect.x &&
+                playerRect.y < socketGameRect.y + socketGameRect.height &&
+                playerRect.y + playerRect.height > socketGameRect.y) {
+                
+                completeLevel();
             }
-        
-            placeSocket();
-          </script>
-    </section>
+        }
+
+        // Completar nível
+        function completeLevel() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.gameTimer);
+            
+            // Bônus por tempo restante
+            const timeBonus = gameState.timeLeft * 10;
+            gameState.score += timeBonus;
+            
+            // Bônus por coletáveis restantes
+            const collectibleBonus = gameState.collectiblesRemaining * 50;
+            gameState.score += collectibleBonus;
+            
+            updateDisplay();
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#00ff88');
+            
+            // Próximo nível
+            gameState.level++;
+            gameState.timeLeft = Math.max(45, 60 - (gameState.level * 5));
+            gameState.moveSpeed = Math.min(15, 10 + gameState.level);
+            
+            showMessage(
+                "🎉 Conexão Estabelecida!",
+                `Nível ${gameState.level - 1} completo!<br>` +
+                `Bônus de tempo: ${timeBonus} pontos<br>` +
+                `Bônus de coletáveis: ${collectibleBonus} pontos<br>` +
+                `Pontuação total: ${gameState.score}`,
+                "Próximo Nível"
+            );
+        }
+
+        // Iniciar timer do jogo
+        function startGameTimer() {
+            gameState.gameTimer = setInterval(() => {
+                if (!gameState.isPaused) {
+                    gameState.timeLeft--;
+                    updateDisplay();
+                    
+                    if (gameState.timeLeft <= 0) {
+                        gameOver();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Game Over
+        function gameOver() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.gameTimer);
+            
+            showMessage(
+                "⚡ Tempo Esgotado!",
+                `Conexão perdida!<br>` +
+                `Pontuação final: ${gameState.score}<br>` +
+                `Nível alcançado: ${gameState.level}`,
+                "Jogar Novamente"
+            );
+        }
+
+        // Pausar/Despausar jogo
+        function togglePause() {
+            gameState.isPaused = !gameState.isPaused;
+            
+            if (gameState.isPaused) {
+                showMessage("⏸️ Jogo Pausado", "Pressione ESPAÇO para continuar", "Continuar");
+            } else {
+                hideMessage();
+            }
+        }
+
+        // Reiniciar nível
+        function restartLevel() {
+            gameState.isPlaying = false;
+            clearInterval(gameState.gameTimer);
+            
+            // Reset do nível atual
+            resetPlayerPosition();
+            resetCollectibles();
+            gameState.timeLeft = Math.max(45, 60 - (gameState.level * 5));
+            
+            updateDisplay();
+            showMessage("🔄 Nível Reiniciado", "Tente novamente!", "Continuar");
+        }
+
+        // Reset dos coletáveis
+        function resetCollectibles() {
+            const collectibles = document.querySelectorAll('.collectible');
+            collectibles.forEach(collectible => {
+                collectible.classList.remove('collected');
+                collectible.style.display = 'block';
+            });
+            gameState.collectiblesRemaining = collectibles.length;
+        }
+
+        // Criar efeito de partículas
+        function createParticleEffect(x, y, color) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = color;
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '60';
+                
+                const angle = (i / 8) * Math.PI * 2;
+                const velocity = 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                particlesContainer.appendChild(particle);
+                
+                let particleX = x;
+                let particleY = y;
+                let opacity = 1;
+                
+                const animateParticle = () => {
+                    particleX += vx * 0.02;
+                    particleY += vy * 0.02;
+                    opacity -= 0.02;
+                    
+                    particle.style.left = particleX + 'px';
+                    particle.style.top = particleY + 'px';
+                    particle.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animateParticle);
+                    } else {
+                        particle.remove();
+                    }
+                };
+                
+                requestAnimationFrame(animateParticle);
+            }
+        }
+
+        // Mostrar mensagem
+        function showMessage(title, text, buttonText) {
+            messageTitle.textContent = title;
+            messageText.innerHTML = text;
+            messageButton.textContent = buttonText;
+            gameMessage.classList.remove('hidden');
+        }
+
+        // Esconder mensagem
+        function hideMessage() {
+            gameMessage.classList.add('hidden');
+        }
+
+        // Manipular botão da mensagem
+        function handleMessageButton() {
+            hideMessage();
+            
+            if (!gameState.isPlaying) {
+                startGame();
+            }
+        }
+
+        // Iniciar jogo
+        function startGame() {
+            gameState.isPlaying = true;
+            gameState.isPaused = false;
+            resetCollectibles();
+            startGameTimer();
+            
+            // Efeito de início
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#00ff88');
+        }
+
+        // Inicialização quando a página carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            initGame();
+        });
+
+        console.log("Jogo do Labirinto ENIAC carregado!");
+    </script>
 </body>
 </html>
