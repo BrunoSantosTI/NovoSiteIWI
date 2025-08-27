@@ -38,70 +38,70 @@
     </section>
     <section id="areadojogo">
         <div id="title">
-            <h1>Jogo do ENIAC</h1>
-            <h2>Conserte o computador pegando os cabos!</h2>
+            <h1 class="title-h1">Jogo do ENIAC</h1>
+            <h2 class="title-h2">Conserte o computador pegando os cabos!</h2>
         </div>
         <div id="gameArea">
             <div id="player"></div>
-            <div id="cable"></div>
+            <div id="socket"></div>
         </div>
-        <div id="score">Cabos conectados: 0</div>
+        <div id="score">Tomadas conectadas: 0</div>
     
         <script>
             const player = document.getElementById("player");
-            const cable = document.getElementById("cable");
+            const socket = document.getElementById("socket");
             const gameArea = document.getElementById("gameArea");
             const scoreDisplay = document.getElementById("score");
         
             let playerX = 50, playerY = 50;
             let score = 0;
         
-            // Gera posição aleatória para o "cabo"
-            function placeCable() {
-                const x = Math.floor(Math.random() * (gameArea.clientWidth - 25));
-                const y = Math.floor(Math.random() * (gameArea.clientHeight - 25));
-                cable.style.left = x + "px";
-                cable.style.top = y + "px";
+            // Coloca a "tomada de parede" em posição aleatória
+            function placeSocket() {
+              const x = Math.floor(Math.random() * (gameArea.clientWidth - 50));
+              const y = Math.floor(Math.random() * (gameArea.clientHeight - 50));
+              socket.style.left = x + "px";
+              socket.style.top = y + "px";
             }
         
             // Movimento do jogador
             document.addEventListener("keydown", (e) => {
-                const step = 10;
-
-                if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-                    e.preventDefault(); // <- impede a página de rolar
-                }
-
-                if (e.key === "ArrowUp" && playerY > 0) playerY -= step;
-                if (e.key === "ArrowDown" && playerY < gameArea.clientHeight - 40) playerY += step;
-                if (e.key === "ArrowLeft" && playerX > 0) playerX -= step;
-                if (e.key === "ArrowRight" && playerX < gameArea.clientWidth - 40) playerX += step;
-
-                player.style.left = playerX + "px";
-                player.style.top = playerY + "px";
-
-                checkCollision();
+              const step = 10;
+        
+              if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+                e.preventDefault(); // impede scroll do site
+              }
+        
+              if (e.key === "ArrowUp" && playerY > 0) playerY -= step;
+              if (e.key === "ArrowDown" && playerY < gameArea.clientHeight - 40) playerY += step;
+              if (e.key === "ArrowLeft" && playerX > 0) playerX -= step;
+              if (e.key === "ArrowRight" && playerX < gameArea.clientWidth - 40) playerX += step;
+        
+              player.style.left = playerX + "px";
+              player.style.top = playerY + "px";
+        
+              checkCollision();
             });
         
-            // Verifica se o técnico pegou o cabo
+            // Verifica se a "cabeça da tomada" encaixou na "tomada da parede"
             function checkCollision() {
-                const playerRect = player.getBoundingClientRect();
-                const cableRect = cable.getBoundingClientRect();
+              const playerRect = player.getBoundingClientRect();
+              const socketRect = socket.getBoundingClientRect();
         
-                if (
-                playerRect.left < cableRect.right &&
-                playerRect.right > cableRect.left &&
-                playerRect.top < cableRect.bottom &&
-                playerRect.bottom > cableRect.top
-                ) {
+              if (
+                playerRect.left < socketRect.right &&
+                playerRect.right > socketRect.left &&
+                playerRect.top < socketRect.bottom &&
+                playerRect.bottom > socketRect.top
+              ) {
                 score++;
-                scoreDisplay.textContent = "Cabos conectados: " + score;
-                placeCable();
-                }
+                scoreDisplay.textContent = "Tomadas conectadas: " + score;
+                placeSocket();
+              }
             }
         
-            placeCable();
-        </script>
+            placeSocket();
+          </script>
     </section>
 </body>
 </html>
