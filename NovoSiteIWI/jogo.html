@@ -6,52 +6,101 @@
     <title>Labirinto do ENIAC - Conecte o Cabo!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Red+Rose:wght@300..700&display=swap" rel="stylesheet">
     <style>
         /* Reset e configurações básicas */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: "PT Serif", serif;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d2d5f 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, #09092d 0%, #26077a 50%, #2838a3 100%);
+            color: #f2f6f0;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Header com position relative para controle de layout */
-        .game-header {
-            position: relative;
-            text-align: center;
-            padding: 20px 0;
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 2px solid #00ff88;
+        section{
+            scroll-margin-top: 90px;
         }
 
-        .header-container {
-            position: relative;
-            z-index: 10;
+        /* Header integrado do CSS externo */
+        header{
+            color: #f2f6f0;
+            background-color:#09092d;
+            padding: 15px 15px 15px 15px;
+            width: 100%;
+            top: 0%;
+            position: fixed;
+            z-index: 1000;
         }
 
-        .game-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #00ff88;
-            text-shadow: 0 0 20px #00ff88;
-            margin-bottom: 10px;
-            position: relative;
+        nav ul{
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .game-subtitle {
-            font-size: 1.1rem;
-            color: #cccccc;
-            position: relative;
+        nav ul li{
+            margin-left: 20px;
+        }
+
+        nav ul li a{
+            color: #2a60c9;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover{
+            background-color: #2838a3;
+            padding-top: 0.5%;
+            padding-bottom: 0.5;
+            color: #f2f6f0;
+        }
+
+        header .container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .logo a{
+            text-decoration: none;
+            color: #f2f6f0;
+        }
+
+        /* Banner integrado do CSS externo */
+        .banner{
+            background: linear-gradient(rgba(9, 9, 45, 0.7), rgba(38, 7, 122, 0.7)), url(../ImagensIWI/ENIAC.jpg) no-repeat center/cover;
+            margin-top: 107px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color:#f2f6f0;
+            font-size: 1.5em;
+            flex-direction: column;
+        }
+
+        #inicio h1{
+            text-shadow: 0 0 10px #26077a;
+            font-size: 50px;
+        }
+
+        #inicio h2{
+            font-size: 25px;
+            text-shadow: 0 0 10px #000;
         }
 
         /* Container principal do jogo - position relative como base */
@@ -65,12 +114,12 @@
         /* Informações do jogo - position fixed para sempre visível */
         .game-info {
             position: fixed;
-            top: 120px;
+            top: 520px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(9, 9, 45, 0.9);
             padding: 15px;
             border-radius: 10px;
-            border: 2px solid #00ff88;
+            border: 2px solid #2a60c9;
             z-index: 100;
             min-width: 200px;
         }
@@ -83,12 +132,12 @@
         }
 
         .score-label, .level-label, .timer-label {
-            color: #cccccc;
+            color: #f2f6f0;
             font-weight: bold;
         }
 
         .score-value, .level-value, .timer-value {
-            color: #00ff88;
+            color: #2a60c9;
             font-weight: bold;
             font-family: 'Orbitron', monospace;
         }
@@ -99,11 +148,11 @@
             width: 800px;
             height: 600px;
             margin: 20px auto;
-            background: #1a1a2e;
-            border: 3px solid #00ff88;
+            background: #26077a;
+            border: 3px solid #2a60c9;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 30px rgba(42, 96, 201, 0.3);
         }
 
         /* Labirinto - position relative para conter elementos absolutos */
@@ -111,15 +160,15 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #16213e 0%, #0f0f23 100%);
+            background: radial-gradient(circle at center, #2838a3 0%, #09092d 100%);
         }
 
         /* PAREDES - Uso extensivo de position absolute */
         .wall {
             position: absolute;
-            background: linear-gradient(45deg, #333366, #4444aa);
-            border: 2px solid #5555cc;
-            box-shadow: inset 0 0 10px rgba(85, 85, 204, 0.5);
+            background: linear-gradient(45deg, #09092d, #26077a);
+            border: 2px solid #2a60c9;
+            box-shadow: inset 0 0 10px rgba(42, 96, 201, 0.5);
         }
 
         /* Paredes horizontais */
@@ -229,9 +278,9 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: radial-gradient(circle, #ffff00 0%, #ffaa00 100%);
+            background: radial-gradient(circle, #2a60c9 0%, #2838a3 100%);
             border-radius: 50%;
-            box-shadow: 0 0 15px #ffff00;
+            box-shadow: 0 0 15px #2a60c9;
             animation: pulse 2s infinite;
         }
 
@@ -269,10 +318,10 @@
             left: 0;
             width: 30px;
             height: 30px;
-            background: linear-gradient(45deg, #ff6b35, #ff8e53);
-            border: 3px solid #ffffff;
+            background: linear-gradient(45deg, #2a60c9, #f2f6f0);
+            border: 3px solid #09092d;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+            box-shadow: 0 0 20px rgba(42, 96, 201, 0.8);
         }
 
         .cable-head::before {
@@ -282,7 +331,7 @@
             left: 8px;
             width: 6px;
             height: 6px;
-            background: #ffffff;
+            background: #09092d;
             border-radius: 50%;
         }
 
@@ -293,7 +342,7 @@
             right: 8px;
             width: 6px;
             height: 6px;
-            background: #ffffff;
+            background: #09092d;
             border-radius: 50%;
         }
 
@@ -303,7 +352,7 @@
             left: 12px;
             width: 6px;
             height: 15px;
-            background: #333333;
+            background: #26077a;
             border-radius: 3px;
         }
 
@@ -321,15 +370,15 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            border: 3px solid #333333;
+            background: linear-gradient(135deg, #f2f6f0, #2a60c9);
+            border: 3px solid #09092d;
             border-radius: 8px;
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+            box-shadow: 0 0 25px rgba(42, 96, 201, 0.6);
         }
 
         .hole {
             position: absolute;
-            background: #333333;
+            background: #09092d;
             border-radius: 50%;
         }
 
@@ -362,7 +411,7 @@
             left: -10px;
             right: -10px;
             bottom: -10px;
-            background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(42, 96, 201, 0.3) 0%, transparent 70%);
             border-radius: 15px;
             animation: socketGlow 3s infinite;
         }
@@ -377,14 +426,14 @@
             position: relative;
             margin-top: 30px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(9, 9, 45, 0.8);
             padding: 20px;
             border-radius: 10px;
-            border: 1px solid #444444;
+            border: 1px solid #2838a3;
         }
 
         .controls-info h3 {
-            color: #00ff88;
+            color: #2a60c9;
             margin-bottom: 15px;
             font-family: 'Orbitron', monospace;
         }
@@ -396,8 +445,8 @@
         }
 
         .key {
-            background: #333333;
-            color: #ffffff;
+            background: #26077a;
+            color: #f2f6f0;
             padding: 5px 10px;
             border-radius: 5px;
             font-family: 'Orbitron', monospace;
@@ -406,7 +455,7 @@
         }
 
         .description {
-            color: #cccccc;
+            color: #f2f6f0;
         }
 
         /* Mensagem do jogo - position fixed para overlay */
@@ -416,7 +465,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(9, 9, 45, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -429,30 +478,30 @@
 
         .message-content {
             position: relative;
-            background: linear-gradient(135deg, #1a1a3a, #2d2d5f);
+            background: linear-gradient(135deg, #26077a, #2838a3);
             padding: 40px;
             border-radius: 15px;
-            border: 3px solid #00ff88;
+            border: 3px solid #2a60c9;
             text-align: center;
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
+            box-shadow: 0 0 50px rgba(42, 96, 201, 0.5);
         }
 
         .message-title {
-            color: #00ff88;
+            color: #2a60c9;
             font-family: 'Orbitron', monospace;
             font-size: 2rem;
             margin-bottom: 20px;
         }
 
         .message-text {
-            color: #ffffff;
+            color: #f2f6f0;
             font-size: 1.2rem;
             margin-bottom: 30px;
         }
 
         .message-button {
-            background: linear-gradient(45deg, #00ff88, #00cc66);
-            color: #000000;
+            background: linear-gradient(45deg, #2a60c9, #2838a3);
+            color: #f2f6f0;
             border: none;
             padding: 15px 30px;
             border-radius: 8px;
@@ -464,7 +513,7 @@
 
         .message-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+            box-shadow: 0 0 20px rgba(42, 96, 201, 0.8);
         }
 
         /* Container de partículas - position absolute para efeitos */
@@ -478,19 +527,14 @@
             z-index: 30;
         }
 
-        /* Footer - position relative para layout normal */
-        .game-footer {
-            position: relative;
+        /* Footer integrado do CSS externo */
+        footer{
+            text-shadow: 0 0 5px black;
             text-align: center;
+            background-color: #09092d;
+            color: #f2f6f0;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid #444444;
             margin-top: 40px;
-        }
-
-        .game-footer p {
-            color: #888888;
-            font-size: 0.9rem;
         }
 
         /* Responsividade */
@@ -507,8 +551,22 @@
                 margin-bottom: 20px;
             }
             
-            .game-title {
+            .banner h1 {
                 font-size: 2rem;
+            }
+
+            header .container{
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul{
+                margin-top: 10px;
+                flex-direction: column;
+            }
+
+            .banner{
+                margin-top: 200px;
             }
         }
 
@@ -522,15 +580,68 @@
                 margin: 10px 0;
             }
         }
+
+        .container{
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .small-screen-message {
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 9, 45, 0.95);
+            color: #f2f6f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.5rem;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .small-screen-message {
+                z-index: 100100100;
+                position: fixed;
+            }
+
+            .game-header, .banner, .game-main, footer {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="game-header">
-        <div class="header-container">
-            <h1 class="game-title">🔌 Labirinto do ENIAC</h1>
-            <p class="game-subtitle">Conecte o cabo à tomada navegando pelo labirinto!</p>
+    <div class="small-screen-message">
+        <p>Este jogo não é otimizado para telas menores que 1200px de largura. Por favor, use uma tela maior para uma melhor experiência.</p>
+    </div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">INFOTEC</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#historia">História do ENIAC</a></li>
+                    <li><a href="index.html#caracteristicas">Características e Funcionamento</a></li>
+                    <li><a href="index.html#galeria">Galeria de Imagens</a></li>
+                    <li><a href="jogo.html">Jogo</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
+    <section id="inicio" class="banner">
+       <h1>🔌 Labirinto do ENIAC</h1>
+       <h2>Conecte o cabo à tomada navegando pelo labirinto!</h2>
+    </section>
 
     <main class="game-main">
         <div class="game-info">
@@ -628,9 +739,7 @@
         </div>
     </main>
 
-    <footer class="game-footer">
-        <p>&copy; 2024 Labirinto do ENIAC - Conecte-se ao futuro da computação!</p>
-    </footer>
+    <footer>2025 - Site desenvolvido por Bruno F. Santos - ETEC MCM - Todos os Direitos Reservados ©</footer>
 
     <script>
         // Elementos do DOM
@@ -692,7 +801,7 @@
         function initGame() {
             resetPlayerPosition();
             updateDisplay();
-            showMessage("🔌 Labirinto do ENIAC", "Use as setas para mover o cabo até a tomada!<br>Colete os fios dourados para ganhar pontos!", "Iniciar Jogo");
+            showMessage("🔌 Labirinto do ENIAC", "Use as setas para mover o cabo até a tomada!<br>Colete os fios azuis para ganhar pontos!", "Iniciar Jogo");
             
             // Event listeners
             document.addEventListener("keydown", handleKeyPress);
@@ -703,8 +812,14 @@
 
         // Reset da posição do player
         function resetPlayerPosition() {
-            gameState.playerX = 80;
-            gameState.playerY = 80;
+            let newX, newY;
+            do {
+                newX = Math.floor(Math.random() * (mazeConfig.width - 30));
+                newY = Math.floor(Math.random() * (mazeConfig.height - 30));
+            } while (checkWallCollision(newX, newY));
+
+            gameState.playerX = newX;
+            gameState.playerY = newY;
             updatePlayerPosition();
         }
 
@@ -826,7 +941,7 @@
             gameState.collectiblesRemaining--;
             
             updateDisplay();
-            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#ffff00');
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#2a60c9');
             
             // Som de coleta (simulado com vibração visual)
             player.style.transform = 'scale(1.2)';
@@ -876,7 +991,7 @@
             gameState.score += collectibleBonus;
             
             updateDisplay();
-            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#00ff88');
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#2a60c9');
             
             // Próximo nível
             gameState.level++;
@@ -937,13 +1052,16 @@
             gameState.isPlaying = false;
             clearInterval(gameState.gameTimer);
             
-            // Reset do nível atual
-            resetPlayerPosition();
-            resetCollectibles();
-            gameState.timeLeft = Math.max(45, 60 - (gameState.level * 5));
+            gameState.playerX = 80;
+            gameState.playerY = 80;
+            gameState.timeLeft = 60;
+            gameState.collectiblesRemaining = 10;
             
+            updatePlayerPosition();
             updateDisplay();
-            showMessage("🔄 Nível Reiniciado", "Tente novamente!", "Continuar");
+            resetCollectibles();
+            
+            showMessage("🔄 Nível Reiniciado", "Tente novamente!", "Iniciar");
         }
 
         // Reset dos coletáveis
@@ -953,12 +1071,12 @@
                 collectible.classList.remove('collected');
                 collectible.style.display = 'block';
             });
-            gameState.collectiblesRemaining = collectibles.length;
+            gameState.collectiblesRemaining = 10;
         }
 
         // Criar efeito de partículas
         function createParticleEffect(x, y, color) {
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 10; i++) {
                 const particle = document.createElement('div');
                 particle.style.position = 'absolute';
                 particle.style.left = x + 'px';
@@ -970,12 +1088,13 @@
                 particle.style.pointerEvents = 'none';
                 particle.style.zIndex = '60';
                 
-                const angle = (i / 8) * Math.PI * 2;
-                const velocity = 50;
+                particlesContainer.appendChild(particle);
+                
+                // Animação da partícula
+                const angle = (Math.PI * 2 * i) / 10;
+                const velocity = 50 + Math.random() * 50;
                 const vx = Math.cos(angle) * velocity;
                 const vy = Math.sin(angle) * velocity;
-                
-                particlesContainer.appendChild(particle);
                 
                 let particleX = x;
                 let particleY = y;
@@ -993,7 +1112,7 @@
                     if (opacity > 0) {
                         requestAnimationFrame(animateParticle);
                     } else {
-                        particle.remove();
+                        particlesContainer.removeChild(particle);
                     }
                 };
                 
@@ -1031,7 +1150,7 @@
             startGameTimer();
             
             // Efeito de início
-            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#00ff88');
+            createParticleEffect(gameState.playerX + 15, gameState.playerY + 15, '#2a60c9');
         }
 
         // Inicialização quando a página carrega
@@ -1039,7 +1158,7 @@
             initGame();
         });
 
-        console.log("Jogo do Labirinto ENIAC carregado!");
+        console.log("Jogo do Labirinto ENIAC carregado com nova paleta de cores!");
     </script>
 </body>
 </html>
